@@ -1,1 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Management - Ready to Deliver</title>
 
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4fff4;
+}
+
+header{
+background:#1fa34a;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.order-box{
+background:white;
+padding:15px;
+margin-bottom:15px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.status{
+padding:5px 10px;
+border-radius:5px;
+color:white;
+font-size:12px;
+}
+
+.pending{background:orange;}
+.processing{background:blue;}
+.delivered{background:green;}
+
+.btn{
+padding:8px 12px;
+border:none;
+background:#1fa34a;
+color:white;
+border-radius:5px;
+cursor:pointer;
+margin-right:5px;
+}
+
+.delete{
+background:red;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Order Management System</h1>
+<p>Admin Panel - Ready to Deliver</p>
+</header>
+
+<div class="container">
+
+<h2>All Orders</h2>
+
+<div id="orders"></div>
+
+</div>
+
+<script>
+
+// Load orders
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+// Sample order (first time demo)
+if(orders.length === 0){
+orders.push({
+name:"Demo Customer",
+phone:"9000000000",
+items:"Rice, Oil",
+status:"pending"
+});
+localStorage.setItem("orders", JSON.stringify(orders));
+}
+
+function render(){
+let box = document.getElementById("orders");
+box.innerHTML = "";
+
+orders.forEach((o,index)=>{
+
+box.innerHTML += `
+<div class="order-box">
+<h3>${o.name} (${o.phone})</h3>
+<p>Items: ${o.items}</p>
+
+<span class="status ${o.status}">
+${o.status.toUpperCase()}
+</span>
+
+<br><br>
+
+<button class="btn" onclick="updateStatus(${index},'processing')">Processing</button>
+<button class="btn" onclick="updateStatus(${index},'delivered')">Delivered</button>
+<button class="btn delete" onclick="deleteOrder(${index})">Delete</button>
+</div>
+`;
+});
+
+localStorage.setItem("orders", JSON.stringify(orders));
+}
+
+function updateStatus(i,status){
+orders[i].status = status;
+render();
+}
+
+function deleteOrder(i){
+orders.splice(i,1);
+render();
+}
+
+render();
+
+</script>
+
+</body>
+</html>
