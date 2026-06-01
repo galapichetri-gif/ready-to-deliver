@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ready to Deliver - Cart</title>
 
+<style>
+body{
+font-family:Arial,sans-serif;
+margin:0;
+background:#f4fff4;
+}
+
+header{
+background:#1fa34a;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.cart-item{
+background:white;
+padding:15px;
+margin-bottom:15px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.total{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+margin-top:20px;
+}
+
+.btn{
+display:inline-block;
+background:#1fa34a;
+color:white;
+padding:12px 20px;
+text-decoration:none;
+border-radius:5px;
+margin-top:10px;
+}
+
+footer{
+background:#222;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:30px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Shopping Cart</h1>
+<p>Ready to Deliver</p>
+</header>
+
+<div class="container">
+
+<div class="cart-item">
+<span>🥬 Rice (5 KG)</span>
+<span>₹350</span>
+</div>
+
+<div class="cart-item">
+<span>💄 Face Wash</span>
+<span>₹199</span>
+</div>
+
+<div class="cart-item">
+<span>📚 Notebook</span>
+<span>₹60</span>
+</div>
+
+<div class="total">
+<h2>Total: ₹609</h2>
+
+<a href="https://wa.me/918638890291?text=Hello%20I%20want%20to%20order%20the%20items%20in%20my%20cart"
+class="btn">
+Checkout on WhatsApp
+</a>
+</div>
+
+</div>
+
+<footer>
+© 2026 Ready to Deliver
+</footer>
+
+</body>
+</html>
