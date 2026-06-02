@@ -3,88 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPI Payment - Ready to Deliver</title>
+<title>UPI Payment Page</title>
 
 <style>
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f4fff4;
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4fff4;
 }
 
 header{
-background:#1fa34a;
-color:white;
-text-align:center;
-padding:20px;
+    background:#1fa34a;
+    color:white;
+    text-align:center;
+    padding:20px;
 }
 
 .container{
-max-width:500px;
-margin:auto;
-padding:20px;
+    max-width:500px;
+    margin:auto;
+    padding:20px;
 }
 
 .box{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-text-align:center;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    text-align:center;
 }
 
 .upi-id{
-font-size:18px;
-font-weight:bold;
-color:#1fa34a;
-margin:15px 0;
+    font-size:18px;
+    font-weight:bold;
+    color:#1fa34a;
+    margin:15px 0;
+    word-break:break-all;
 }
 
 .qr{
-width:200px;
-height:200px;
-background:#eee;
-display:flex;
-align-items:center;
-justify-content:center;
-margin:auto;
-border-radius:10px;
-font-size:14px;
-color:#555;
+    width:200px;
+    height:200px;
+    margin:auto;
+    background:#eee;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    overflow:hidden;
 }
 
 input{
-width:100%;
-padding:12px;
-margin:10px 0;
-border:1px solid #ccc;
-border-radius:5px;
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
 }
 
 button{
-width:100%;
-padding:12px;
-background:#1fa34a;
-color:white;
-border:none;
-border-radius:5px;
-font-size:16px;
-cursor:pointer;
+    width:100%;
+    padding:12px;
+    background:#1fa34a;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#168a3b;
 }
 
 .note{
-font-size:13px;
-color:gray;
-margin-top:10px;
+    font-size:13px;
+    color:gray;
+    margin-top:10px;
 }
 </style>
+
 </head>
 
 <body>
 
 <header>
 <h1>UPI Payment</h1>
-<p>Ready to Deliver</p>
+<p>Secure Payment Page</p>
 </header>
 
 <div class="container">
@@ -94,26 +99,42 @@ margin-top:10px;
 <h2>Pay Using UPI</h2>
 
 <div class="upi-id">
-UPI ID: 8638890291@upi
+UPI ID: chetritrishak-1@okhdfcbank
 </div>
 
 <div class="qr">
-QR CODE PLACEHOLDER
+<p>QR CODE HERE</p>
 </div>
 
 <p class="note">
 Scan QR or use UPI ID to pay manually
 </p>
 
-<input type="text" placeholder="Enter Transaction ID">
+<!-- Direct UPI Pay Button -->
+<a href="upi://pay?pa=chetritrishak-1@okhdfcbank&pn=Trishak&cu=INR" style="text-decoration:none;">
+<button>Pay Now</button>
+</a>
 
-<button onclick="alert('Payment submitted successfully! We will verify your order.')">
-Submit Payment
-</button>
+<input type="text" id="txid" placeholder="Enter Transaction ID">
+
+<button onclick="submitPayment()">Submit Payment</button>
+
+<p class="note">We will verify your payment manually.</p>
 
 </div>
-
 </div>
+
+<script>
+function submitPayment(){
+    let tx = document.getElementById("txid").value;
+
+    if(tx.length < 8){
+        alert("Please enter valid Transaction ID");
+    } else {
+        alert("Payment submitted successfully! We will verify soon.");
+    }
+}
+</script>
 
 </body>
-</html>
+  </html>
