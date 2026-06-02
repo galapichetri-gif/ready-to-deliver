@@ -16,49 +16,49 @@ font-family:'Poppins',sans-serif;
 }
 
 body{
-background:#f8fdf8;
-color:#333;
+background:#f6fff8;
+color:#222;
 }
 
 /* HEADER */
 header{
-background:rgba(31,163,74,0.95);
-backdrop-filter:blur(10px);
-padding:15px 8%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-color:white;
+padding:15px 8%;
+background:white;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
 position:sticky;
 top:0;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
+z-index:1000;
 }
 
 .logo{
-font-size:28px;
+font-size:24px;
 font-weight:700;
+color:#1fa34a;
 }
 
 nav a{
-color:white;
-text-decoration:none;
 margin-left:20px;
+text-decoration:none;
+color:#333;
 font-weight:500;
 transition:0.3s;
 }
 
 nav a:hover{
-color:#d1ffe0;
+color:#1fa34a;
 }
 
 /* HERO */
 .hero{
-padding:80px 8%;
 display:flex;
-align-items:center;
 justify-content:space-between;
+align-items:center;
+padding:80px 8%;
 flex-wrap:wrap;
-background:linear-gradient(135deg,#e9fff0,#ffffff);
+background:linear-gradient(135deg,#eafff0,#ffffff);
 }
 
 .hero-text{
@@ -66,60 +66,54 @@ max-width:550px;
 }
 
 .hero-text h1{
-font-size:52px;
+font-size:48px;
 color:#0f7c35;
 margin-bottom:15px;
-animation:fadeUp 1s ease;
 }
 
 .hero-text p{
-font-size:18px;
+font-size:17px;
 margin-bottom:25px;
-animation:fadeUp 1.3s ease;
+color:#555;
 }
 
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(20px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-/* BUTTON */
 .btn{
 display:inline-block;
 padding:14px 28px;
 background:#1fa34a;
 color:white;
 text-decoration:none;
-border-radius:8px;
+border-radius:10px;
 font-weight:600;
 transition:0.3s;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
+box-shadow:0 8px 20px rgba(31,163,74,0.3);
 }
 
 .btn:hover{
-transform:scale(1.05);
+transform:translateY(-3px);
 background:#0f7c35;
 }
 
-/* HERO ICON */
+/* HERO IMAGE */
 .hero-image{
 font-size:120px;
+animation:float 3s infinite ease-in-out;
 }
 
-/* SECTIONS */
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0);}
+}
+
+/* SECTION */
 .section{
 padding:70px 8%;
 }
 
-.section-title{
+.title{
 text-align:center;
-font-size:36px;
+font-size:34px;
 margin-bottom:40px;
 color:#0f7c35;
 }
@@ -127,8 +121,8 @@ color:#0f7c35;
 /* GRID */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:20px;
 }
 
 /* CARD */
@@ -136,20 +130,20 @@ gap:25px;
 background:white;
 padding:25px;
 border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,0.08);
 text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,0.06);
 transition:0.3s;
-border:1px solid rgba(0,0,0,0.05);
+border:1px solid #eee;
 }
 
 .card:hover{
 transform:translateY(-8px);
-box-shadow:0 10px 25px rgba(0,0,0,0.15);
+box-shadow:0 12px 25px rgba(0,0,0,0.12);
 }
 
 .card h3{
-margin:15px 0;
 color:#1fa34a;
+margin-bottom:10px;
 }
 
 /* FEATURES */
@@ -160,26 +154,25 @@ color:white;
 
 .features .card{
 background:white;
-color:#333;
+color:#222;
 }
 
 /* CONTACT */
 .contact{
 text-align:center;
+padding:60px 20px;
 background:#0f7c35;
 color:white;
-padding:60px 20px;
 }
 
-/* FOOTER */
 footer{
-background:#111;
-color:white;
 text-align:center;
 padding:20px;
+background:#111;
+color:white;
 }
 
-/* WHATSAPP BUTTON */
+/* WHATSAPP */
 .whatsapp{
 position:fixed;
 bottom:20px;
@@ -190,11 +183,12 @@ padding:15px 18px;
 border-radius:50%;
 font-size:24px;
 text-decoration:none;
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
 animation:pulse 1.5s infinite;
 }
 
 @keyframes pulse{
-0%{box-shadow:0 0 0 0 rgba(37,211,102,0.6);}
+0%{box-shadow:0 0 0 0 rgba(37,211,102,0.5);}
 70%{box-shadow:0 0 0 15px rgba(37,211,102,0);}
 100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}
 }
@@ -206,7 +200,6 @@ animation:pulse 1.5s infinite;
 
 <header>
 <div class="logo">Ready to Deliver</div>
-
 <nav>
 <a href="#">Home</a>
 <a href="products.html">Products</a>
@@ -218,16 +211,14 @@ animation:pulse 1.5s infinite;
 <section class="hero">
 
 <div class="hero-text">
-<h1>Everything Delivered To Your Doorstep</h1>
+<h1>Fast & Reliable Delivery at Your Doorstep</h1>
 
 <p>
-Fast delivery of Grocery, Cosmetics, Printing
-and Stationery products in Tihu, Makhibaha and Haribhanga.
+We deliver Grocery, Cosmetics, Printing & Stationery quickly in your local area.
+Easy ordering through WhatsApp.
 </p>
 
-<a href="https://wa.me/918638890291" class="btn">
-Order on WhatsApp
-</a>
+<a href="https://wa.me/918638890291" class="btn">Order Now</a>
 </div>
 
 <div class="hero-image">🛒</div>
@@ -236,23 +227,23 @@ Order on WhatsApp
 
 <section class="section">
 
-<h2 class="section-title">Our Categories</h2>
+<h2 class="title">Our Categories</h2>
 
 <div class="grid">
 
 <div class="card">
 <h3>🥬 Grocery</h3>
-<p>Fresh groceries and daily essentials.</p>
+<p>Fresh daily essentials delivered fast.</p>
 </div>
 
 <div class="card">
 <h3>💄 Cosmetics</h3>
-<p>Beauty and personal care products.</p>
+<p>Beauty and personal care items.</p>
 </div>
 
 <div class="card">
 <h3>🖨 Printing</h3>
-<p>Photo copy, print and design services.</p>
+<p>Fast printing & photocopy service.</p>
 </div>
 
 <div class="card">
@@ -266,13 +257,13 @@ Order on WhatsApp
 
 <section class="section features">
 
-<h2 class="section-title" style="color:white;">Why Choose Us?</h2>
+<h2 class="title" style="color:white;">Why Choose Us?</h2>
 
 <div class="grid">
 
 <div class="card">
 <h3>⚡ Fast Delivery</h3>
-<p>Same day delivery available.</p>
+<p>Same day service available.</p>
 </div>
 
 <div class="card">
@@ -281,40 +272,24 @@ Order on WhatsApp
 </div>
 
 <div class="card">
-<h3>💵 Cash on Delivery</h3>
-<p>Pay after receiving products.</p>
+<h3>💵 COD</h3>
+<p>Pay after delivery.</p>
 </div>
 
 <div class="card">
-<h3>⭐ Trusted Service</h3>
-<p>Local and reliable delivery network.</p>
+<h3>⭐ Trusted</h3>
+<p>Local reliable service.</p>
 </div>
 
 </div>
 
 </section>
 
-<section class="section">
-
-<h2 class="section-title">Service Areas</h2>
-
-<div class="grid">
-
-<div class="card">📍 Tihu Town</div>
-<div class="card">📍 Makhibaha</div>
-<div class="card">📍 Haribhanga</div>
-
-</div>
-
-</section>
-
-<section class="contact">
+<section class="section contact">
 
 <h2>Contact Us</h2>
-
 <p>📞 8638890291</p>
 <p>📧 chetritrishak@gmail.com</p>
-<p>🌐 readytodeliver.in</p>
 
 </section>
 
@@ -322,9 +297,7 @@ Order on WhatsApp
 © 2026 Ready to Deliver. All Rights Reserved.
 </footer>
 
-<a class="whatsapp" href="https://wa.me/918638890291">
-💬
-</a>
+<a class="whatsapp" href="https://wa.me/918638890291">💬</a>
 
 </body>
 </html>
