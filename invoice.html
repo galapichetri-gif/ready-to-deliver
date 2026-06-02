@@ -1,46 +1,55 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script>
 function generateInvoice(){
 
-const { jsPDF } = window.jspdf;
-const doc = new jsPDF();
+    if(!window.jspdf){
+        alert("PDF library not loaded!");
+        return;
+    }
 
-let name = document.getElementById("name").value;
-let phone = document.getElementById("phone").value;
-let items = document.getElementById("items").value;
-let total = document.getElementById("total").value;
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
 
-let invoiceNo = "RTD" + Date.now();
-let date = new Date().toLocaleDateString();
+    let name = document.getElementById("name").value || "N/A";
+    let phone = document.getElementById("phone").value || "N/A";
+    let items = document.getElementById("items").value || "No items";
+    let total = document.getElementById("total").value || "0";
 
-doc.setFontSize(20);
-doc.text("READY TO DELIVER", 20, 20);
+    let invoiceNo = "RTD" + Date.now();
+    let date = new Date().toLocaleDateString();
 
-doc.setFontSize(11);
-doc.text("Tihu • Makhibaha • Haribhanga", 20, 30);
+    doc.setFontSize(18);
+    doc.text("READY TO DELIVER", 20, 20);
 
-doc.line(20,35,190,35);
+    doc.setFontSize(11);
+    doc.text("Tihu • Makhibaha • Haribhanga", 20, 30);
 
-doc.text("Invoice No: " + invoiceNo, 20, 45);
-doc.text("Date: " + date, 140, 45);
+    doc.line(20,35,190,35);
 
-doc.text("Customer Name: " + name, 20, 60);
-doc.text("Phone: " + phone, 20, 70);
+    doc.text("Invoice No: " + invoiceNo, 20, 45);
+    doc.text("Date: " + date, 140, 45);
 
-doc.text("Items Ordered:", 20, 90);
+    doc.text("Customer Name: " + name, 20, 60);
+    doc.text("Phone: " + phone, 20, 70);
 
-let splitItems = doc.splitTextToSize(items, 160);
-doc.text(splitItems, 20, 100);
+    doc.text("Items Ordered:", 20, 90);
 
-doc.setFontSize(14);
-doc.text("Total Amount: ₹" + total, 20, 140);
+    let splitItems = doc.splitTextToSize(items, 160);
+    doc.text(splitItems, 20, 100);
 
-doc.setFontSize(12);
-doc.text("Payment Status: Pending", 20, 160);
+    let y = 100 + splitItems.length * 5;
 
-doc.text("Thank you for shopping with Ready to Deliver!", 20, 180);
+    doc.setFontSize(14);
+    doc.text("Total Amount: ₹" + total, 20, y + 10);
 
-doc.save("ReadyToDeliver-Invoice.pdf");
+    doc.setFontSize(12);
+    doc.text("Payment Status: Pending", 20, y + 25);
 
-document.getElementById("preview").style.display="block";
+    doc.text("Thank you for shopping with Ready to Deliver!", 20, y + 40);
+
+    doc.save("ReadyToDeliver-Invoice.pdf");
+
+    alert("Invoice downloaded successfully!");
 }
 </script>
