@@ -40,86 +40,71 @@ display:inline-block;
 padding:10px 20px;
 background:#1fa34a;
 color:white;
-text-decoration:none;
+border:none;
 border-radius:5px;
+cursor:pointer;
 margin-top:10px;
 }
 
-footer{
-background:#222;
-color:white;
+.cart-link{
+display:block;
 text-align:center;
-padding:15px;
-margin-top:20px;
+margin:20px;
+font-size:18px;
+font-weight:bold;
+color:#1fa34a;
+text-decoration:none;
 }
 </style></head><body><header>
 <h1>Ready to Deliver Products</h1>
 <p>Grocery • Cosmetics • Printing • Stationery</p>
-</header><div class="products"><div class="card">
+</header><a class="cart-link" href="cart.html">
+🛒 View Cart
+</a><div class="products"><div class="card">
 <h3>🥬 Rice</h3>
 <p>5 KG Premium Rice - ₹350</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
+<button class="btn" onclick="addToCart('Rice',350)">Add to Cart</button>
 </div><div class="card">
 <h3>🛢 Mustard Oil</h3>
 <p>1 Litre - ₹180</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
+<button class="btn" onclick="addToCart('Mustard Oil',180)">Add to Cart</button>
 </div><div class="card">
 <h3>🥚 Eggs</h3>
 <p>12 Pieces - ₹90</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
+<button class="btn" onclick="addToCart('Eggs',90)">Add to Cart</button>
 </div><div class="card">
 <h3>🍜 Noodles</h3>
 <p>Pack - ₹30</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
+<button class="btn" onclick="addToCart('Noodles',30)">Add to Cart</button>
 </div><div class="card">
 <h3>💄 Face Wash</h3>
 <p>100ml - ₹199</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
+<button class="btn" onclick="addToCart('Face Wash',199)">Add to Cart</button>
 </div><div class="card">
 <h3>🧴 Shampoo</h3>
 <p>200ml - ₹249</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
-</div><div class="card">
-<h3>🧼 Soap</h3>
-<p>Bath Soap - ₹45</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
-</div><div class="card">
-<h3>🪮 Hair Oil</h3>
-<p>200ml - ₹150</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
-</div><div class="card">
-<h3>🖨 Colour Print</h3>
-<p>₹10 Per Page</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
-</div><div class="card">
-<h3>📄 Xerox</h3>
-<p>₹2 Per Page</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
-</div><div class="card">
-<h3>📑 Lamination</h3>
-<p>₹30 Per Sheet</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
-</div><div class="card">
-<h3>🖼 Photo Print</h3>
-<p>High Quality Print</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
+<button class="btn" onclick="addToCart('Shampoo',249)">Add to Cart</button>
 </div><div class="card">
 <h3>📚 Notebook</h3>
 <p>200 Pages - ₹60</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
+<button class="btn" onclick="addToCart('Notebook',60)">Add to Cart</button>
 </div><div class="card">
 <h3>🖊 Pen Set</h3>
 <p>Pack of 5 - ₹120</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
-</div><div class="card">
-<h3>✏ Pencil Box</h3>
-<p>School Use - ₹80</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
-</div><div class="card">
-<h3>📁 File Folder</h3>
-<p>Office Use - ₹50</p>
-<a href="https://wa.me/918638890291" class="btn">Order Now</a>
-</div></div><footer>
-© 2026 Ready to Deliver
-</footer></body>
+<button class="btn" onclick="addToCart('Pen Set',120)">Add to Cart</button>
+</div></div><script>
+function addToCart(name, price){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+cart.push({
+name:name,
+price:price
+});
+
+localStorage.setItem("cart", JSON.stringify(cart));
+
+alert(name + " added to cart!");
+}
+</script></body>
 </html>
