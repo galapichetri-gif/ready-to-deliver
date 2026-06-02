@@ -1,20 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Auto Invoice</title>
+<style>
+body{font-family:Arial;background:#f4fff4;margin:0}
+.box{max-width:600px;margin:auto;background:white;padding:20px;border-radius:10px;margin-top:20px}
+button{width:100%;padding:12px;background:#1fa34a;color:white;border:none;border-radius:5px;margin-top:10px}
+.item{padding:5px 0;border-bottom:1px solid #eee}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>🧾 Auto Invoice</h2>
+
+<div id="items"></div>
+
+<h3 id="total"></h3>
+
+<button onclick="downloadPDF()">Download PDF Invoice</button>
+</div>
+
+<!-- jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-function generateInvoice(){
 
-    if(!window.jspdf){
-        alert("PDF library not loaded!");
-        return;
-    }
+// LOAD CART
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let total = 0;
+let itemText = "";
+
+// SHOW ON SCREEN
+cart.forEach(i=>{
+    document.getElementById("items").innerHTML +=
+    `<div class="item">${i.name} - ₹${i.price}</div>`;
+
+    total += i.price;
+    itemText += i.name + " - ₹" + i.price + "\n";
+});
+
+document.getElementById("total").innerText = "Total: ₹" + total;
+
+
+// PDF GENERATE
+function downloadPDF(){
 
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-
-    let name = document.getElementById("name").value || "N/A";
-    let phone = document.getElementById("phone").value || "N/A";
-    let items = document.getElementById("items").value || "No items";
-    let total = document.getElementById("total").value || "0";
 
     let invoiceNo = "RTD" + Date.now();
     let date = new Date().toLocaleDateString();
@@ -23,33 +58,29 @@ function generateInvoice(){
     doc.text("READY TO DELIVER", 20, 20);
 
     doc.setFontSize(11);
-    doc.text("Tihu • Makhibaha • Haribhanga", 20, 30);
+    doc.text("Invoice No: " + invoiceNo, 20, 30);
+    doc.text("Date: " + date, 20, 38);
 
-    doc.line(20,35,190,35);
+    doc.line(20, 42, 190, 42);
 
-    doc.text("Invoice No: " + invoiceNo, 20, 45);
-    doc.text("Date: " + date, 140, 45);
+    doc.text("Items:", 20, 55);
 
-    doc.text("Customer Name: " + name, 20, 60);
-    doc.text("Phone: " + phone, 20, 70);
+    let split = doc.splitTextToSize(itemText, 160);
+    doc.text(split, 20, 65);
 
-    doc.text("Items Ordered:", 20, 90);
-
-    let splitItems = doc.splitTextToSize(items, 160);
-    doc.text(splitItems, 20, 100);
-
-    let y = 100 + splitItems.length * 5;
+    let y = 65 + split.length * 5;
 
     doc.setFontSize(14);
-    doc.text("Total Amount: ₹" + total, 20, y + 10);
+    doc.text("Total: ₹" + total, 20, y + 10);
 
     doc.setFontSize(12);
     doc.text("Payment Status: Pending", 20, y + 25);
 
-    doc.text("Thank you for shopping with Ready to Deliver!", 20, y + 40);
+    doc.text("Thank you for shopping!", 20, y + 40);
 
-    doc.save("ReadyToDeliver-Invoice.pdf");
-
-    alert("Invoice downloaded successfully!");
+    doc.save("invoice.pdf");
 }
 </script>
+
+</body>
+</html>
