@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ready to Deliver - Cart</title>
-
-<style>
+<title>Ready to Deliver - Cart</title><style>
 body{
 font-family:Arial,sans-serif;
 margin:0;
@@ -36,6 +33,15 @@ justify-content:space-between;
 align-items:center;
 }
 
+.remove-btn{
+background:red;
+color:white;
+border:none;
+padding:8px 12px;
+border-radius:5px;
+cursor:pointer;
+}
+
 .total{
 background:white;
 padding:20px;
@@ -61,44 +67,59 @@ text-align:center;
 padding:15px;
 margin-top:30px;
 }
-</style>
-</head>
-<body>
-
-<header>
+</style></head>
+<body><header>
 <h1>Shopping Cart</h1>
 <p>Ready to Deliver</p>
-</header>
-
-<div class="container">
-
-<div class="cart-item">
-<span>🥬 Rice (5 KG)</span>
-<span>₹350</span>
-</div>
-
-<div class="cart-item">
-<span>💄 Face Wash</span>
-<span>₹199</span>
-</div>
-
-<div class="cart-item">
-<span>📚 Notebook</span>
-<span>₹60</span>
-</div>
-
-<div class="total">
-<h2>Total: ₹609</h2>
-<a href="checkout.html" class="btn">
+</header><div class="container"><div id="cartItems"></div><div class="total">
+<h2 id="totalPrice">Total: ₹0</h2><a href="checkout.html" class="btn">
 Proceed to Checkout
 </a>
-</div>
-
-</div>
-
-<footer>
+</div></div><footer>
 © 2026 Ready to Deliver
-</footer>
+</footer><script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-</body>
+function renderCart(){
+
+let cartItems = document.getElementById("cartItems");
+let total = 0;
+
+cartItems.innerHTML = "";
+
+cart.forEach((item,index)=>{
+
+total += item.price;
+
+cartItems.innerHTML += `
+<div class="cart-item">
+<span>${item.name} - ₹${item.price}</span>
+
+<button class="remove-btn"
+onclick="removeItem(${index})">
+Remove
+</button>
+</div>
+`;
+
+});
+
+document.getElementById("totalPrice").innerText =
+"Total: ₹" + total;
+}
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
+);
+
+renderCart();
+}
+
+renderCart();
+</script></body>
 </html>
