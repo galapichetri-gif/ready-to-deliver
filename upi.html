@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPI Payment Page</title>
+<title>UPI Payment System</title>
 
 <style>
 body{
     margin:0;
-    font-family:Arial,sans-serif;
+    font-family:Arial;
     background:#f4fff4;
 }
 
@@ -37,33 +37,14 @@ header{
     font-size:18px;
     font-weight:bold;
     color:#1fa34a;
-    margin:15px 0;
-    word-break:break-all;
-}
-
-.qr{
-    width:200px;
-    height:200px;
-    margin:auto;
-    background:#eee;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:10px;
-    overflow:hidden;
-}
-
-input{
-    width:100%;
-    padding:12px;
     margin:10px 0;
-    border:1px solid #ccc;
-    border-radius:5px;
+    word-break:break-all;
 }
 
 button{
     width:100%;
     padding:12px;
+    margin-top:10px;
     background:#1fa34a;
     color:white;
     border:none;
@@ -76,10 +57,33 @@ button:hover{
     background:#168a3b;
 }
 
-.note{
-    font-size:13px;
-    color:gray;
+input{
+    width:100%;
+    padding:12px;
     margin-top:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.qr{
+    width:200px;
+    height:200px;
+    background:#eee;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+}
+
+.status{
+    margin-top:10px;
+    font-weight:bold;
+    color:orange;
+}
+
+.success{
+    color:green;
 }
 </style>
 
@@ -88,30 +92,26 @@ button:hover{
 <body>
 
 <header>
-<h1>UPI Payment</h1>
-<p>Secure Payment Page</p>
+<h1>UPI Payment System</h1>
+<p>Fast & Secure</p>
 </header>
 
 <div class="container">
-
 <div class="box">
 
 <h2>Pay Using UPI</h2>
 
-<div class="upi-id">
-UPI ID: chetritrishak-1@okhdfcbank
+<div class="upi-id" id="upi">
+chetritrishak-1@okhdfcbank
 </div>
+
+<button onclick="copyUPI()">Copy UPI ID</button>
 
 <div class="qr">
-<p>QR CODE HERE</p>
+<p>QR CODE</p>
 </div>
 
-<p class="note">
-Scan QR or use UPI ID to pay manually
-</p>
-
-<!-- Direct UPI Pay Button -->
-<a href="upi://pay?pa=chetritrishak-1@okhdfcbank&pn=Trishak&cu=INR" style="text-decoration:none;">
+<a href="upi://pay?pa=chetritrishak-1@okhdfcbank&pn=Trishak&cu=INR">
 <button>Pay Now</button>
 </a>
 
@@ -119,22 +119,31 @@ Scan QR or use UPI ID to pay manually
 
 <button onclick="submitPayment()">Submit Payment</button>
 
-<p class="note">We will verify your payment manually.</p>
+<div id="status" class="status">Status: Waiting for payment...</div>
 
 </div>
 </div>
 
 <script>
+function copyUPI(){
+    let upi = document.getElementById("upi").innerText;
+    navigator.clipboard.writeText(upi);
+    alert("UPI ID Copied!");
+}
+
 function submitPayment(){
     let tx = document.getElementById("txid").value;
+    let status = document.getElementById("status");
 
     if(tx.length < 8){
-        alert("Please enter valid Transaction ID");
-    } else {
-        alert("Payment submitted successfully! We will verify soon.");
+        alert("Invalid Transaction ID");
+        return;
     }
+
+    status.innerText = "Status: Payment Submitted (Pending Verification)";
+    status.classList.add("success");
 }
 </script>
 
 </body>
-  </html>
+</html>
